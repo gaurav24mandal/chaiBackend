@@ -1,10 +1,20 @@
 require("dotenv").config();
 const express = require("express")
 const mongoDb = require('./db/index')
-mongoDb();
+const  cookieParser = require('cookie-parser');
+const app = require("./app")
 
+mongoDb()
+.then(()=>{
+    app.listen(process.env.PORT,()=>{
+        console.log(`server  running on port ${process.env.PORT||8000}`);
+    })
+})
+.catch((error)=>{
+    console.log(`mongoDb connection failed ${error.message} `);
+})
 
-
+ 
 
 
 
